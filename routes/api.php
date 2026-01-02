@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -7,4 +8,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-/* test */
+Route::get('/hello', function () {
+    return ["messsage" => "Hello Laravel API"];
+});
+
+Route::prefix('v1')->group(function () {
+    Route::apiResource('posts', PostController::class);
+});
